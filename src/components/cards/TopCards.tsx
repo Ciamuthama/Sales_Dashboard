@@ -1,79 +1,142 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Tabs } from "flowbite-react";
 import Analytics from "../charts/singup_pie/Analytics";
-import FinancesPie from "../charts/singup_pie/Finances";
-import TimetablePie from "../charts/singup_pie/Timetable";
-import AnalyticsBars from "../charts/sign_ups_bar/analytics_bar";
-import FinancesBars from "../charts/sign_ups_bar/finances_bar";
-import TimetableBars from "../charts/sign_ups_bar/Timetable_bar";
+import AnalyticsBars from "../charts/sign_ups_bar/barChart";
+import { Invoices, School } from "./schools";
+import { Collection } from "./Collections";
+import { BsOpencollective } from "react-icons/bs";
+import { SiOpencollective } from "react-icons/si";
+import { Link } from "react-router-dom";
+import Timetable from "../charts/singup_pie/Timetable";
+import Finances from "../charts/singup_pie/Finances";
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
 
 export default function TopCards() {
+  const [invoice, setInvoice] = useState<Invoices[]>([]);
+  const [schools, setSchools] = useState<School[]>([]);
+  const [collection,setCollection] = useState<Collection[]>([])
+  const getInvoice = () => {
+    fetch(`http://localhost:8080/invoices`)
+      .then((res) => res.json())
+      .then((data) =>
+        setInvoice(
+          data.sort(
+            (a, b) =>
+              new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+          )
+        )
+      );
+  };
+
+  useEffect(() => {
+    fetch("http://localhost:8080/schools")
+      .then((res) => res.json())
+      .then((data) => setSchools(data));
+  }, []);
+
+  const getCollection=()=>{
+    fetch(`http://localhost:8080/collections`)
+    .then((res)=>res.json())
+    .then((data)=>setCollection(data))
+  }
+  useEffect(() => {
+    getInvoice();
+    getCollection()
+  }, []);
+
+  const handleInvoiceSelection = (school: School) => {
+    getInvoice(school);
+    const modal = document.getElementById("my_modal_5");
+    if (modal) {
+      (modal as HTMLDialogElement).showModal();
+    }
+  };
+
   return (
     <>
-      <section className="flex flex-row justify-between gap-3 mx-10">
-        <div className="w-[200px] h-[200px] bg-[#FFE2E5] rounded-[16px] shadow-md p-6">
-          <p>2k</p>
-          <p>Collection</p>
-          <p>+%8 from yesterday </p>
-        </div>
-        <div className="w-[200px] h-[200px] bg-[#F3E8FF] rounded-[16px]  shadow-md p-6">
-          <p>Bounced Cheques</p>
-          <p>-%8 from yesterday </p>
-        </div>
-      </section>
+      <div className="mx-10 my-10 grid grid-cols-2 gap-x-5 gap-y-10">
+        <section className="flex flex-col gap-3">
+          <Link to={"/collection"}><div className=" h-[150px] rounded-[16px] border-gray-200 border-[1px] p-6 flex flex-col place-content-center">
+          <SiOpencollective  size={50} />
+            <p>  {(collection.filter(item => item.status == "valid").length/100)*100}% collection made </p>
+            <p>
+            {collection.filter(item => item.status == "valid").length}
+            </p>
+          </div></Link>
+          <div className=" h-[150px] rounded-[16px] border-gray-200 border-[1px] p-6 flex flex-col place-content-center">
+            <BsOpencollective size={50}/>
+            <p>{collection.filter(item => item.status == "bounced").length} bounced Cheques</p>
+            <p>{(collection.filter(item => item.status == "bounced").length/100)*100}% of the total collection bounced</p>
+          </div>
+        </section>
 
-      <section className=" bg-[#FFF4DE] rounded-[16px]  shadow-md p-6 flex gap-3">
-        <div>
-          <p>Sign-ups</p>
-          <div className=" bg-slate-400 rounded-[10px]">
-            <p>Zeraki Analytics</p>
-            <Analytics />
-          </div>
-          <div className=" bg-slate-400 rounded-[10px]">
-            <p>Zeraki Finance</p>
-            <FinancesPie />
-          </div>
-          <div className=" bg-slate-400 rounded-[10px]">
-            <p>Zeraki Timetable</p>
-            <TimetablePie />
-          </div>
+        <div className="flex">
+          <Tabs
+            aria-label="Tabs with underline"
+            style="underline"
+            className="w-[25vw] "
+          >
+            <Tabs.Item active title="Zeraki Analytics">
+              <div className=" bg-slate-100 rounded-[10px]">
+                <Analytics />
+              </div>
+            </Tabs.Item>
+            <Tabs.Item title="Zeraki Finance">
+              <div className=" bg-slate-100 rounded-[10px]">
+                <Finances />
+              </div>
+            </Tabs.Item>
+            <Tabs.Item title="Zeraki Timetable">
+              <div className=" bg-slate-100 rounded-[10px]">
+                <Timetable />
+              </div>
+            </Tabs.Item>
+          </Tabs>
         </div>
-        <div>
-          <div className=" bg-slate-400 rounded-[10px]">
-            <p>Zeraki Analytics</p>
-            <AnalyticsBars />
-          </div>
-          <div className=" bg-slate-400 rounded-[10px]">
-            <p>Zeraki Finance</p>
-            <FinancesBars />
-          </div>
-          <div className=" bg-slate-400 rounded-[10px]">
-            <p>Zeraki Timetable</p>
-            <TimetableBars />
-          </div>
-        </div>
-      </section>
 
-      <section className="w-[591px] h-[348px] bg-[#DCFCE7] rounded-[16px]  shadow-md p-6 flex gap-3">
-        <p>Invoices</p>
-        <ul className="overflow-scroll">
-          <li>school 1</li>
-          <li>school 2</li>
-          <li>school3</li>
-          <li>school 4</li>
-          <li>school 1</li>
-          <li>school 2</li>
-          <li>school3</li>
-          <li>school 4</li>
-          <li>school 1</li>
-          <li>school 2</li>
-          <li>school3</li>
-          <li>school 4</li>
-          <li>school 1</li>
-          <li>school 2</li>
-          <li>school3</li>
-          <li>school 4</li>
-        </ul>
-      </section>
+        <div>
+          <div className="flex flex-row gap-2">
+            <div className=" bg-slate-100 rounded-[10px] p-4 flex flex-col place-content-center w-full">
+              <p>Zeraki Analytics</p>
+              <AnalyticsBars />
+            </div>
+          </div>
+
+          <section className="rounded-[16px]  p-6 flex flex-col gap-3">
+            <p>Invoices</p>
+            <table className="table table-lg overflow-scroll w-[80vw]">
+              <thead className="border-b-2 border-gray-200 bg-gray-100">
+                <tr>
+                  <th>School Name</th>
+                  <th>Invoice Number</th>
+                  <th>Due Date</th>
+                  <th>Amount</th>
+                  <th>Balance</th>
+                </tr>
+              </thead>
+              <tbody>
+                {invoice.map((invoice) => (
+                  <tr key={invoice.id}>
+                    <td>
+                      {
+                        schools.find(
+                          (school: School) => school.id === invoice.schoolId
+                        )?.name
+                      }
+                    </td>
+                    <td>{invoice.invoiceNumber}</td>
+                    <td>{invoice.dueDate}</td>
+                    <td>KES {(invoice.amount.toLocaleString())}</td>
+                    <td>KES {((invoice.amount)-(invoice.paidAmount)).toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+        </div>
+      </div>
     </>
   );
 }

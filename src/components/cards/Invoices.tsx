@@ -9,7 +9,7 @@ export default function Invoices({ selectedSchool, schools }) {
   return (
     <div>
       <div>
-        <div className="modal-box flex place-content-center h-[80vh] !w-[100vw]">
+        <div className="modal-box flex place-content-center h-[80vh] !w-screen">
           <div className="modal-action">
             <form method="dialog !w-[60vw]">
                 <button className="btn btn-sm btn-ghost absolute right-2 top-2 font-bold">Esc[X]</button>
@@ -22,12 +22,13 @@ export default function Invoices({ selectedSchool, schools }) {
                     <Label
                       htmlFor="name"
                       value="School Name:"
-                      className="!w-[45vw]"
+                      className="!w-[20vw] min-w-[10vw]"
                     />
                     <TextInput
                       type="text"
                       name="name"
                       id="name"
+                      color={"black"}
                       value={
                         schools.find(
                           (school: School) =>
@@ -43,13 +44,17 @@ export default function Invoices({ selectedSchool, schools }) {
                   name="invoiceNumber"
                   id="invoiceNumber"
                   value={selectedSchool.invoiceNumber}
+                  color={"black"}
                 />
                 <Label>Creation Date:</Label>
                 <TextInput
-                  type="date"
+                  type="text"
+                  disabled
                   name=""
                   id=""
-                  value={selectedSchool.creationDate}
+                  value={selectedSchool.creationDate.toString()}
+               
+                  color={"black"}
                 />
               </div>
               <div className="flex flex-col gap-5 mt-5"><button className="btn btn-success text-white">Update</button>

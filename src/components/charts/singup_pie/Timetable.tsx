@@ -1,29 +1,62 @@
-import { CChart } from '@coreui/react-chartjs';
-import * as React from 'react';
+import React from "react";
+import { CChart } from "@coreui/react-chartjs";
+import { School } from "../../cards/schools";
 
 
-export default function TimetablePie() {
+const Timetable = () => {
+  const [schools, setSchools] = React.useState<School[]>([]);
+ 
+
+  React.useEffect(() => {
+    fetch("http://localhost:8080/schools")
+      .then((res) => res.json())
+      .then((data) => setSchools(data));
+  }, []);
+
+   const primaryData =(product:string)=> schools.filter(
+    (school) => school.type === "Primary" && school.product === product
+  ).length;
+
+  const secondaryData =(product:string)=> schools.filter(
+    (school) => school.type === "Secondary" && school.product === product
+  ).length;
+
+  const igcseData = (product:string)=>schools.filter(
+    (school) => school.type === "IGCSE" && school.product === product
+  ).length;
+  
   return (
-    <CChart
-    type="doughnut"
-    data={{
-      labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
-      datasets: [
-        {
-          backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-          data: [40, 20, 80, 10],
-        },
-      ],
-    }}
-    options={{
-      plugins: {
-        legend: {
-          labels: {
-            color: "rgba(253,255,0)",
-          }
-        }
+<CChart
+  type="pie"
+  className="w-[25vw] flex flex-col"
+  wrapper={true}
+  data={{
+    labels: ['Primary', 'Secondary', 'IGCSE'],
+    datasets: [
+      {
+        backgroundColor: ['#2ea5de', '#43ab49', '#172b4c'],
+        data: [primaryData("Zeraki Timetable"),secondaryData("Zeraki Timetable"),igcseData("Zeraki Timetable")],
       },
-    }}
-  />
+    ],
+  }}
+  options={{
+    plugins: {
+      tooltip:{
+        position:"average",
+        xAlign:"right",
+        yAlign:"top",
+        mode:"y",
+        footerColor:"#172b4c"
+      },
+      legend: {
+        labels: {
+          color: "black",
+        }
+      }
+    },
+  }}
+/>
   );
-}
+};
+
+export default Timetable;

@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.chartjs-tooltip{
+    position: absolute !important;
+    color: #ffff;
+}
+

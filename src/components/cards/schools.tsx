@@ -3,6 +3,8 @@ import Invoices from "./Invoices";
 import { TextInput } from "flowbite-react";
 import { IoIosSearch } from "react-icons/io";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
 export interface School {
   id: number;
   name: string;
@@ -19,7 +21,7 @@ export interface Balance {
   collectionsMade: number;
 }
 
-interface Invoices {
+export interface Invoices {
   id: number;
   schoolId: number;
   invoiceNumber: string;
@@ -64,7 +66,7 @@ export default function Schools() {
         </div>
         <div className="overflow-x-auto border-gray-300/50 border-[1px] rounded-xl mt-5 shadow-gray-200 shadow-sm">
           <table className="table table-md">
-            <thead className="text-base border-b-2 border-gray-200">
+            <thead className="text-[14px] border-b-2 border-gray-200 bg-gray-100">
               <tr>
                 <th></th>
                 <th >Name</th>
@@ -79,16 +81,16 @@ export default function Schools() {
             </thead>
             <tbody className="text-justify p-2">
               {schools.map((school, index) => (
-                <tr className="text-base" key={index} onClick={() => handleSchoolSelection(school)}>
-                  <th className="text-base">{index + 1}</th>
-                  <td className="text-base">{school.name}</td>
-                  <td className="text-base">{school.type}</td>
-                  <td className="text-base">{school.product}</td>
-                  <td className="text-base">{school.county}</td>
-                  <td className="text-base">{school.registrationDate}</td>
-                  <td className="text-base">{school.contactInformation}</td>
-                  <td className="text-base">{school.balance.invoicesCreated}</td>
-                  <td className="text-base">{school.balance.collectionsMade}</td>
+                <tr className="text-[14px]" key={index} onClick={() => handleSchoolSelection(school)}>
+                  <th className="text-[14px]">{index + 1}</th>
+                  <td className="text-[14px]">{school.name}</td>
+                  <td className="text-[14px]">{school.type}</td>
+                  <td className="text-[14px]">{school.product}</td>
+                  <td className="text-[14px]">{school.county}</td>
+                  <td className="text-[14px]">{school.registrationDate}</td>
+                  <td className="text-[14px]">{school.contactInformation}</td>
+                  <td className="text-[14px]">{school.balance.invoicesCreated}</td>
+                  <td className="text-[14px]">{school.balance.collectionsMade}</td>
                 </tr>
               ))}
             </tbody>
@@ -97,7 +99,7 @@ export default function Schools() {
       </div>
       {selectedSchool && (
         <>
-        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle place-content-center">
         <Invoices selectedSchool={selectedSchool}  schools={schools}/>
         </dialog>
         </>
