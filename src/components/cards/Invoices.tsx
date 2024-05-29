@@ -1,10 +1,12 @@
 import React from "react";
 import { Label, TextInput, } from "flowbite-react";
-import { School } from "./schools";
+import type { Invoices , School } from "./schools";
+
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-expect-error
 export default function Invoices({ selectedSchool, schools }) {
+  const invoice:Invoices = selectedSchool
   
   return (
     <div>
@@ -17,7 +19,7 @@ export default function Invoices({ selectedSchool, schools }) {
                 School Invoice
               </h2>
               <div className="flex flex-col gap-4">
-                {selectedSchool.schoolId && (
+                {invoice.schoolId && (
                   <>
                     <Label
                       htmlFor="name"
@@ -32,7 +34,7 @@ export default function Invoices({ selectedSchool, schools }) {
                       value={
                         schools.find(
                           (school: School) =>
-                            school.id === selectedSchool.schoolId
+                            school.id === invoice.schoolId
                         )?.name
                       }
                     />
@@ -43,7 +45,7 @@ export default function Invoices({ selectedSchool, schools }) {
                   type="text"
                   name="invoiceNumber"
                   id="invoiceNumber"
-                  value={selectedSchool.invoiceNumber}
+                  value={invoice.invoiceNumber}
                   color={"black"}
                 />
                 <Label>Creation Date:</Label>
@@ -52,7 +54,7 @@ export default function Invoices({ selectedSchool, schools }) {
                   disabled
                   name=""
                   id=""
-                  value={selectedSchool.creationDate.toString()}
+                  value={invoice.creationDate.toString()}
                
                   color={"black"}
                 />

@@ -9,6 +9,8 @@ import { SiOpencollective } from "react-icons/si";
 import { Link } from "react-router-dom";
 import Timetable from "../charts/singup_pie/Timetable";
 import Finances from "../charts/singup_pie/Finances";
+import CollectionModal from "../modal/collectionModal";
+import { MdEditNote } from "react-icons/md";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 
@@ -17,6 +19,8 @@ export default function TopCards() {
   const [invoice, setInvoice] = useState<Invoices[]>([]);
   const [schools, setSchools] = useState<School[]>([]);
   const [collection,setCollection] = useState<Collection[]>([])
+  const [selectedCollection,setSelectedCollection] = useState<Invoices[]>([])
+
   const getInvoice = () => {
     fetch(`http://localhost:8080/invoices`)
       .then((res) => res.json())
@@ -36,6 +40,13 @@ export default function TopCards() {
       .then((data) => setSchools(data));
   }, []);
 
+  const getOneInvoice =(collection:Collection)=>{
+    fetch(`http://localhost:8080/collections/${collection.id}`)
+    .then((res) => res.json())
+    .then((data) => setSelectedCollection(data));
+  }
+ 
+
   const getCollection=()=>{
     fetch(`http://localhost:8080/collections`)
     .then((res)=>res.json())
@@ -46,8 +57,9 @@ export default function TopCards() {
     getCollection()
   }, []);
 
-  const handleInvoiceSelection = (school: School) => {
-    getInvoice(school);
+
+  const handleInvoiceSelection = (invoice: Invoices) => {
+    getOneInvoice(invoice);
     const modal = document.getElementById("my_modal_5");
     if (modal) {
       (modal as HTMLDialogElement).showModal();
@@ -130,10 +142,18 @@ export default function TopCards() {
                     <td>{invoice.dueDate}</td>
                     <td>KES {(invoice.amount.toLocaleString())}</td>
                     <td>KES {((invoice.amount)-(invoice.paidAmount)).toLocaleString()}</td>
+                    <td onClick={()=>handleInvoiceSelection(invoice)}><MdEditNote size={30}/></td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            {selectedCollection && (
+        <>
+        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle place-content-center">
+        <CollectionModal selectedCollection={selectedCollection}  schools={schools}/>
+        </dialog>
+        </>
+      )}
           </section>
         </div>
       </div>
