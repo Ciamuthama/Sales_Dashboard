@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { School } from "./schools";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { FaRegCircleXmark } from "react-icons/fa6";

@@ -1,4 +1,3 @@
-import React from "react";
 import Schools from "../cards/schools";
 
 export default function Modular() {

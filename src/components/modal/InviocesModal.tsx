@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Invoices } from "../cards/schools";
 import { Label, Select, TextInput } from "flowbite-react";
 import { useForm, SubmitHandler } from "react-hook-form";
