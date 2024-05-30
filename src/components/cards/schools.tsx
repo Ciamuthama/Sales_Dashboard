@@ -41,13 +41,13 @@ export default function Schools() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8080/schools")
+    fetch("https://zeraki-api.onrender.com/schools")
       .then((res) => res.json())
       .then((data) => setSchools(data));
   }, []);
 
   const getInvoice = (school: School) => {
-    fetch(`http://localhost:8080/invoices/${school.id}`).then((res) => {
+    fetch(`https://zeraki-api.onrender.com/invoices/${school.id}`).then((res) => {
       if (res.status === 200) {
         return res.json().then((data) => setSelectedSchool(data));
       } else if (res.status === 404) {
@@ -59,7 +59,7 @@ export default function Schools() {
     });
   };
   const getCollection = () => {
-    fetch(`http://localhost:8080/collections`)
+    fetch(`https://zeraki-api.onrender.com/collections`)
       .then((res) => res.json())
       .then((data) => setCollection(data));
   };

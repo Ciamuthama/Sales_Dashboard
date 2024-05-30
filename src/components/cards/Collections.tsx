@@ -25,7 +25,7 @@ export default function Collections() {
   const [schools, setSchools] = useState<School[]>([]);
 
   const getCollection = () => {
-    fetch(`http://localhost:8080/collections`)
+    fetch(`https://zeraki-api.onrender.com/collections`)
       .then((res) => res.json())
       .then((data) => setCollection(data));
   };
@@ -51,7 +51,7 @@ export default function Collections() {
     );
     setCollection(updatedCollection);
    
-    fetch(`http://localhost:8080/collections/${id}`, {
+    fetch(`https://zeraki-api.onrender.com/collections/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

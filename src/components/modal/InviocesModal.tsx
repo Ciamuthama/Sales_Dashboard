@@ -25,7 +25,7 @@ export default function InvoiceModal() {
 
    
     try {
-      const createInvoice = await fetch(`http://localhost:8080/invoices`, {
+      const createInvoice = await fetch(`https://zeraki-api.onrender.com/invoices`, {
         method: "POST",
         body: JSON.stringify({
           status: invoice.amount,

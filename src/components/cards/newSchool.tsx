@@ -9,7 +9,7 @@ export default function SchoolModal() {
 
   const handleCreate: SubmitHandler<School> = async (school: School) => {
     try {
-      const createschool = await fetch(`http://localhost:8080/schools`, {
+      const createschool = await fetch(`https://zeraki-api.onrender.com/schools`, {
         method: "POST",
         body: JSON.stringify({
           name: school.name,

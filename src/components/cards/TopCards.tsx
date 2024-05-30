@@ -22,7 +22,7 @@ export default function TopCards() {
   const [selectedSchool, setSelectedSchool] = useState<Invoices | null>(null);
 
   const getInvoice = () => {
-    fetch(`http://localhost:8080/invoices`)
+    fetch(`https://zeraki-api.onrender.com/invoices`)
       .then((res) => res.json())
       .then((data) =>
         setInvoice(
@@ -35,7 +35,7 @@ export default function TopCards() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:8080/schools")
+    fetch("https://zeraki-api.onrender.com/schools")
       .then((res) => res.json())
       .then((data) => setSchools(data));
   }, []);
@@ -44,7 +44,7 @@ export default function TopCards() {
  
 
   const getCollection=()=>{
-    fetch(`http://localhost:8080/collections`)
+    fetch(`https://zeraki-api.onrender.com/collections`)
     .then((res)=>res.json())
     .then((data)=>setCollection(data))
   }
@@ -55,7 +55,7 @@ export default function TopCards() {
 
 
   const getSelectedInvoice = (invoice: Invoices) => {
-    fetch(`http://localhost:8080/invoices/${invoice.id}`)
+    fetch(`https://zeraki-api.onrender.com/invoices/${invoice.id}`)
       .then((res) => res.json())
       .then((data) => setSelectedSchool(data));
   };

@@ -21,7 +21,7 @@ export default function Invoices({ selectedSchool, schools, collection }) {
   const updateInvoices = async () => {
     try {
       const putInvoice = await fetch(
-        `http://localhost:8080/invoices/${updatedInvoice.id}`,
+        `https://zeraki-api.onrender.com/invoices/${updatedInvoice.id}`,
         {
           method: "PATCH",
           body: JSON.stringify({
@@ -45,7 +45,7 @@ export default function Invoices({ selectedSchool, schools, collection }) {
   const updateSchool = async () => {
     try {
       const putSchool = await fetch(
-        `http://localhost:8080/schools/${updatedSchool.id}`,
+        `https://zeraki-api.onrender.com/schools/${updatedSchool.id}`,
         {
           method: "PATCH",
           body: JSON.stringify({
@@ -69,7 +69,7 @@ export default function Invoices({ selectedSchool, schools, collection }) {
   const updateCollection = async () => {
     try {
       const putCollect = await fetch(
-        `http://localhost:8080/collections/${updatedCollection.id}`,
+        `https://zeraki-api.onrender.com/collections/${updatedCollection.id}`,
         {
           method: "PATCH",
           body: JSON.stringify({
@@ -111,14 +111,14 @@ export default function Invoices({ selectedSchool, schools, collection }) {
 
   const handleDeleteAll = async () => {
     try {
-      await fetch(`http://localhost:8080/schools/${updatedSchool.id}`, {
+      await fetch(`https://zeraki-api.onrender.com/schools/${updatedSchool.id}`, {
         method: "DELETE",
       });
-      await fetch(`http://localhost:8080/invoices/${updatedInvoice.id}`, {
+      await fetch(`https://zeraki-api.onrender.com/invoices/${updatedInvoice.id}`, {
         method: "DELETE",
       });
       await fetch(
-        `http://localhost:8080/collections/${updatedCollection.id}`,
+        `https://zeraki-api.onrender.com/collections/${updatedCollection.id}`,
         {
           method: "DELETE",
         }
@@ -131,11 +131,11 @@ export default function Invoices({ selectedSchool, schools, collection }) {
 
   const handleDeleteInvoiceAndCollection = async () => {
     try {
-      await fetch(`http://localhost:8080/invoices/${updatedInvoice.id}`, {
+      await fetch(`https://zeraki-api.onrender.com/invoices/${updatedInvoice.id}`, {
         method: "DELETE",
       });
       await fetch(
-        `http://localhost:8080/collections/${updatedCollection.id}`,
+        `https://zeraki-api.onrender.com/collections/${updatedCollection.id}`,
         {
           method: "DELETE",
         }
