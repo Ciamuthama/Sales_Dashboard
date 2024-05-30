@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { Tabs } from "flowbite-react";
 import Analytics from "../charts/singup_pie/Analytics";
@@ -27,7 +28,7 @@ export default function TopCards() {
       .then((data) =>
         setInvoice(
           data.sort(
-            (a, b) =>
+            (a:any, b:any) =>
               new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
           )
         )
@@ -143,8 +144,8 @@ export default function TopCards() {
                     <td className="text-center">{invoice.paidAmount}</td>
                     <td className="text-justify">KES {((invoice.amount)-(invoice.paidAmount)).toLocaleString()}</td>
                     <td className="text-justify">{schools.find((school:School)=> school.id === invoice.id)?.product}</td>
-                    <td>{invoice.dueDate}</td>
-                    <td>{invoice.creationDate}</td>
+                    <td>{new Date(invoice.dueDate).toLocaleDateString()}</td>
+                    <td>{new Date(invoice.creationDate).toLocaleDateString()}</td>
                     <td className="capitalize">
                       {
                         collection.find(

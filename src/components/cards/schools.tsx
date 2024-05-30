@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import Invoices from "./Invoices";
 import { TextInput } from "flowbite-react";
@@ -140,7 +141,7 @@ export default function Schools() {
                   <td className="text-[14px]">{school.type}</td>
                   <td className="text-[14px]">{school.product}</td>
                   <td className="text-[14px]">{school.county}</td>
-                  <td className="text-[14px]">{school.registrationDate}</td>
+                  <td className="text-[14px]">{new Date(school.registrationDate).toLocaleDateString()}</td>
                   <td className="text-[14px]">{school.contactInformation}</td>
                   <td className="text-[14px]">
                     {school.balance}

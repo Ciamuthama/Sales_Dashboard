@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { MdSchool } from "react-icons/md";
 import { MdDashboardCustomize } from "react-icons/md";

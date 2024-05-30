@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import  { useState } from "react";
 import { Label, Select, TextInput } from "flowbite-react";
 import type { Invoices, School } from "./schools";
 import { Collection } from "./Collections";
@@ -97,15 +98,15 @@ export default function Invoices({ selectedSchool, schools, collection }) {
   };
 
   
-  const handleInvoiceChange = (e) => {
+  const handleInvoiceChange = (e: { target: { name: any; value: any; }; }) => {
     setUpdatedInvoice({ ...updatedInvoice, [e.target.name]: e.target.value });
   };
 
-  const handleSchoolChange = (e) => {
+  const handleSchoolChange = (e: { target: { name: any; value: any; }; }) => {
     setUpdatedSchool({ ...updatedSchool, [e.target.name]: e.target.value });
   };
 
-  const handleCollectionChange = (e) => {
+  const handleCollectionChange = (e: { target: { value: any; }; }) => {
     setUpdatedCollection({ ...updatedCollection, status: e.target.value });
   };
 
