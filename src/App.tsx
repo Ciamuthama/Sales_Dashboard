@@ -8,7 +8,7 @@ import Collections from './components/cards/Collections';
 export default function App() {
   return (
 <Router>
-<div className='flex flex-row gap-3 mx-10'>
+<div className='flex flex-row'>
   <Sidebar/>
     
       <Routes>

@@ -28,7 +28,7 @@ const Analytics = () => {
   return (
 <CChart
   type="pie"
-  className="w-[25vw] flex flex-col"
+  className=" h-[35vh] flex flex-row justify-center"
   data={{
     labels: ['Primary', 'Secondary', 'IGCSE'],
     datasets: [
