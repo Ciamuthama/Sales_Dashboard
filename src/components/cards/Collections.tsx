@@ -31,7 +31,7 @@ export default function Collections() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:8080/schools")
+    fetch("https://zeraki-api.onrender.com/schools")
       .then((res) => res.json())
       .then((data) => setSchools(data));
   }, []);

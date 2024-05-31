@@ -138,7 +138,7 @@ export default function TopCards() {
               </thead>
               <tbody>
                 {invoice.map((invoice) => (
-                  <tr key={invoice.id} className="text-center">
+                  <tr key={invoice.id} className="text-center" onClick={()=>handleSchoolSelection(invoice)}>
                     <td className="text-center">{invoice.invoiceNumber}</td>
                     <td className="text-center">{invoice.amount}</td>
                     <td className="text-center">{invoice.paidAmount}</td>
@@ -154,7 +154,7 @@ export default function TopCards() {
                       }
                     </td>
                     <td className="text-center">{invoice.daysUntilDue}</td>
-                    <td onClick={()=>handleSchoolSelection(invoice)}><MdEditNote size={30}/></td>
+                    <td onClick={()=>handleSchoolSelection(invoice)}><p>Edit </p></td>
                   </tr>
                 ))}
               </tbody>
