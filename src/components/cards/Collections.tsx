@@ -66,7 +66,7 @@ export default function Collections() {
   };
 
   return (
-    <div className="mt-10">
+    <div className="mt-10 tooltip" data-tip="Click the status icons to change collection status">
       <div className="flex justify-center mb-10">
         <TextInput type="search" placeholder="Search" className="w-1/2" />
       </div>
