@@ -10,7 +10,6 @@ import { SiOpencollective } from "react-icons/si";
 import { Link } from "react-router-dom";
 import Timetable from "../charts/singup_pie/Timetable";
 import Finances from "../charts/singup_pie/Finances";
-import { MdEditNote } from "react-icons/md";
 import InvoicesComponent from "./Invoices";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
