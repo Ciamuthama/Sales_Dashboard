@@ -66,11 +66,11 @@ export default function Collections() {
   };
 
   return (
-    <div className="mt-10 tooltip" data-tip="Click the status icons to change collection status">
+    <div className="mt-10 " >
       <div className="flex justify-center mb-10">
         <TextInput type="search" placeholder="Search" className="w-1/2" />
       </div>
-      <table className="table overflow-scroll w-[80vw] leading-[0px]">
+      <table className="table overflow-scroll w-[80vw] leading-[0px] tooltip " data-tip="Click the status icons to change collection status">
         <thead className="border-b-2 border-gray-200 bg-gray-100">
           <tr className="text-black text-[14px]">
             <th>School Name</th>
