@@ -157,7 +157,7 @@ export default function Invoices({ selectedSchool, schools, collection }) {
                 className="btn btn-sm btn-ghost absolute right-2 top-2 font-bold"
                 onClick={() => window.location.reload()}
               >
-                X
+                Esc[X]
               </button>
 
               <h2 className="font-bold text-center uppercase mb-10">
