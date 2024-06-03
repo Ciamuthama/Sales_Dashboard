@@ -75,7 +75,7 @@ export default function Invoices({ selectedSchool, schools, collection }) {
           method: "PATCH",
           body: JSON.stringify({
             ...updatedCollection,
-            name: updatedCollection.status,
+            status: updatedCollection.status,
           }),
           headers: {
             "Content-Type": "application/json",
